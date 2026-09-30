@@ -1,16 +1,18 @@
 import User from "../models/User.js";
 import Job from "../models/Job.js";
 import Application from "../models/Application.js";
+import Query from "../models/Query.js";
 
 // GET /api/admin/stats
 export const getStats = async (req, res) => {
-  const [users, companies, jobs, applications] = await Promise.all([
+  const [users, companies, jobs, applications, queries] = await Promise.all([
     User.countDocuments({ role: "user" }),
     User.countDocuments({ role: "company" }),
     Job.countDocuments(),
     Application.countDocuments(),
+    Query.countDocuments({ resolved: false }),
   ]);
-  res.json({ users, companies, jobs, applications });
+  res.json({ users, companies, jobs, applications, queries });
 };
 
 // GET /api/admin/users?role=

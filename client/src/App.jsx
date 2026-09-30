@@ -11,17 +11,21 @@ import MyApplications from "./pages/MyApplications";
 import CompanyDashboard from "./pages/CompanyDashboard";
 import JobApplicants from "./pages/JobApplicants";
 import AdminDashboard from "./pages/AdminDashboard";
+import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
 export default function App() {
   const location = useLocation();
   return (
-    <>
+    <div className="app">
       <Navbar />
+      <main>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:id" element={<JobDetail />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/my-applications" element={<ProtectedRoute roles={["user"]}><MyApplications /></ProtectedRoute>} />
@@ -30,6 +34,8 @@ export default function App() {
           <Route path="/admin" element={<ProtectedRoute roles={["admin"]}><AdminDashboard /></ProtectedRoute>} />
         </Routes>
       </AnimatePresence>
-    </>
+      </main>
+      <Footer />
+    </div>
   );
 }

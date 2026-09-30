@@ -12,6 +12,7 @@ import jobRoutes from "./routes/jobs.js";
 import applicationRoutes from "./routes/applications.js";
 import messageRoutes from "./routes/messages.js";
 import adminRoutes from "./routes/admin.js";
+import contactRoutes from "./routes/contact.js";
 
 dotenv.config();
 connectDB();
@@ -29,6 +30,7 @@ app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/contact", contactRoutes);
 
 // central error handler (e.g. multer file errors)
 app.use((err, req, res, next) => {

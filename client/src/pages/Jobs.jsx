@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import api from "../api/axios";
 import PageWrapper from "../components/PageWrapper";
 
 export default function Jobs() {
   const [jobs, setJobs] = useState([]);
-  const [search, setSearch] = useState("");
-  const [type, setType] = useState("");
+  const [params] = useSearchParams();
+  const [search, setSearch] = useState(params.get("search") || "");
+  const [type, setType] = useState(params.get("type") || "");
 
   const load = async () => {
     const { data } = await api.get("/jobs", { params: { search, type } });
